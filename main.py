@@ -11,7 +11,7 @@ def get_read_file(filename: str) -> list[list]:
 def create_file_bd(filename: str, new_data: list[list]):
     """ создаёт файл filename.csv из списка new_data = [[],[],...]"""
     with open("files_bd/" + filename + ".csv", "w", encoding="utf-8",
-              newline='') as file:  # newline=''- игнорируем пустые строки
+              newline='') as file:  # newline=''- без пустых строк
         writer = csv.writer(file)
         for each in new_data:
             writer.writerow(tuple(each))
@@ -75,8 +75,9 @@ def main():
     ads_file = get_read_file("datasets/ads.csv")
     ads_file = create_connection_table(ads_file, [2], "author")  # создаём таблицу(файл) с авторами и записываем индексы
     ads_file = create_connection_table(ads_file, [5], "address")  # создаём таблицу(файл) с адресами и ...
-    ads_file = create_connection_table(ads_file, [2, 5], "author_address")  # создаём таблицу(файл) автор-адрес и ...
-    create_file_bd("connections", ads_file)  # создаём таблицу(файл) связей (основную)
+    # ads_file = create_connection_table(ads_file, [2, 5], "author_address")  # создаём таблицу(файл) автор-адрес и ...
+    # ads_file = create_connection_table(ads_file, [1, 3, 4], "product")  # создаём таблицу(файл) с товарами и ...
+    create_file_bd("adss", ads_file)  # создаём таблицу(файл) связей (основную)
     create_file_bd("categories", get_read_file("datasets/categories.csv"))  # пересоздаём таблицу(файл) категорий
 
 
